@@ -1,0 +1,12 @@
+// GET /mp/point/terminals
+app.get("/mp/point/terminals", async (_req, res) => {
+  try {
+    const r = await axios.get(
+      "https://api.mercadopago.com/in-person-payments/point/terminals",
+      { headers: mpHeaders() }
+    );
+    res.json(r.data);
+  } catch (e) {
+    res.status(500).json({ error: e?.response?.data || e.message });
+  }
+});
